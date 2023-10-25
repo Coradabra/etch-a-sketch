@@ -22,15 +22,15 @@ standardBtn.addEventListener("click", () => {
   setActiveBtn(standardBtn);
 });
 shadeBtn.addEventListener("click", () => {
-  drawingType = "SHADE";
+  setTileEventListners(allTiles, "SHADE");
   setActiveBtn(shadeBtn);
 });
 rainbowBtn.addEventListener("click", () => {
-  drawingType = "RAINBOW";
+  setTileEventListners(allTiles, "RAINBOW");
   setActiveBtn(rainbowBtn);
 });
 eraseBtn.addEventListener("click", () => {
-  drawingType = "ERASE";
+  setTileEventListners(allTiles, "ERASE");
   setActiveBtn(eraseBtn);
 });
 clearBtn.addEventListener("click", () => {
@@ -54,17 +54,21 @@ const setDrawingStyles = (tile, drawingType) => {
     case "STANDARD":
       tile.style.backgroundColor = "black";
       tile.style.opacity = 1;
+      return;
     case "SHADE":
       tile.style.backgroundColor = "white";
       const currentOpacity = getComputedStyle(tile).getPropertyValue("opacity");
       tile.style.opacity = (+currentOpacity - 0.1).toString();
+      return;
     case "RAINBOW":
       const randomColor = Math.floor(Math.random() * 16777215).toString(16);
       tile.style.backgroundColor = "#" + randomColor;
       tile.style.opacity = 1;
+      return;
     case "ERASE":
       tile.style.backgroundColor = "white";
       tile.style.opacity = 1;
+      return;
   }
 };
 
@@ -90,7 +94,7 @@ const setGameBoard = (gridSize) => {
 
 setGameBoard(gridSize);
 
-const allTiles = document.querySelectorAll(".tile");
+const allTiles = Array.from(document.querySelectorAll(".tile"));
 
 // Set Draw function
 // Set up shade function
