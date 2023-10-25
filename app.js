@@ -7,11 +7,12 @@ const rainbowBtn = document.querySelector("#rainbowBtn");
 const eraseBtn = document.querySelector("#eraseBtn");
 const clearBtn = document.querySelector("#clearBtn");
 const gridSizeSlider = document.querySelector("#gridSizeSlider");
-const gridSizeSliderLabel = document.querySelector("#gridSizeSliderLabel");
+const gridSizeSliderLabel = document.querySelector(".controls label");
 
 const buttonList = [standardBtn, shadeBtn, rainbowBtn, eraseBtn];
 let drawingType = "STANDARD";
 let gridSize = 16;
+let allTiles = [];
 
 window.addEventListener("resize", () => {
   console.log(window.matchMedia("(max-width: 700px)"));
@@ -36,9 +37,11 @@ eraseBtn.addEventListener("click", () => {
 clearBtn.addEventListener("click", () => {
   setGameBoard(gridSize);
 });
-gridSizeSlider.addEventListener("change", (event) => {
-  const sliderValue = event.target.current.value;
-  gridSizeSliderLabel.textContent = `${sliderValue} X ${sliderValue}`;
+gridSizeSlider.addEventListener("input", () => {
+  gridSizeSliderLabel.textContent = `${gridSizeSlider.value} X ${gridSizeSlider.value}`;
+});
+gridSizeSlider.addEventListener("change", () => {
+  setGameBoard(gridSizeSlider.value);
 });
 
 const setTileEventListners = (tileList, drawingType) => {
@@ -50,6 +53,7 @@ const setTileEventListners = (tileList, drawingType) => {
 };
 
 const setDrawingStyles = (tile, drawingType) => {
+  const currentOpacity = getComputedStyle(tile).getPropertyValue("opacity");
   switch (drawingType) {
     case "STANDARD":
       tile.style.backgroundColor = "black";
@@ -57,7 +61,6 @@ const setDrawingStyles = (tile, drawingType) => {
       return;
     case "SHADE":
       tile.style.backgroundColor = "white";
-      const currentOpacity = getComputedStyle(tile).getPropertyValue("opacity");
       tile.style.opacity = (+currentOpacity - 0.1).toString();
       return;
     case "RAINBOW":
@@ -90,17 +93,9 @@ const setGameBoard = (gridSize) => {
     gameBoardFragment.appendChild(tile);
   }
   gameBoard.appendChild(gameBoardFragment);
+  allTiles = Array.from(document.querySelectorAll(".tile"));
 };
 
 setGameBoard(gridSize);
-
-const allTiles = Array.from(document.querySelectorAll(".tile"));
-
-// Set Draw function
-// Set up shade function
-// Set up rainbow function
-// Set up erase function
-// Connect grid to slider
-// Change Resetbtn to clear
-// Format button styles
-// Improve overall appearnace of the page
+setTileEventListners(allTiles, "STANDARD");
+gridSizeSliderLabel.textContent = `${gridSizeSlider.value} X ${gridSizeSlider.value}`;
