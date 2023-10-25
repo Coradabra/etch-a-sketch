@@ -5,29 +5,49 @@ body {
   align-items: center;
   justify-content: space-between;
   min-height: 100vh;
+  background-color: #757474;
 }
 
 header {
-  background-color: #41d141;
+  background-color: #313131;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 24px;
   margin-bottom: 48px;
+  color: #05a2c9;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  width: 50vw;
+  border-radius: 32px;
+  padding: 24px 48px;
+  margin-bottom: 24px;
+  background-color: #313131;
+}
+
+.controls div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
 }
 
 .controls button {
-  font-size: 36px;
-  padding: 24px 48px;
-  background-color: #41d141;
-  border: 2px solid black;
-  margin-bottom: 48px;
+  font-size: 24px;
+  padding: 12px 24px;
+  background-color: #1b1b1b;
+  color: #05a2c9;
+  border-radius: 32px;
 }
 
-.controls button:hover {
-  background-color: #74da74;
-  box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2);
+.controls button:hover,
+.controls .active {
+  background-color: #3f3f3f;
+  box-shadow: 4px 4px 8px 4px rgba(7, 237, 253, 0.4);
 }
 
 .game-board {
@@ -36,14 +56,14 @@ header {
   display: flex;
   flex-wrap: wrap;
   background-color: black;
-  border: 2px solid black;
+  border: 1px solid black;
   margin-bottom: 48px;
+  box-shadow: 8px 8px 16px 8px rgba(0, 0, 0, 0.2);
 }
 
 .tile {
   box-sizing: border-box;
   border: 1px solid rgb(197, 197, 197);
-  opacity: 100;
   background-color: white;
   opacity: 1;
 }
