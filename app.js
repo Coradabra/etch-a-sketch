@@ -53,24 +53,22 @@ const setTileEventListners = (tileList, drawingType) => {
 };
 
 const setDrawingStyles = (tile, drawingType) => {
-  const currentOpacity = getComputedStyle(tile).getPropertyValue("opacity");
   switch (drawingType) {
     case "STANDARD":
       tile.style.backgroundColor = "black";
-      tile.style.opacity = 1;
       return;
     case "SHADE":
+      const currentOpacity = getComputedStyle(tile).getPropertyValue("opacity");
       tile.style.backgroundColor = "white";
       tile.style.opacity = (+currentOpacity - 0.1).toString();
       return;
     case "RAINBOW":
       const randomColor = Math.floor(Math.random() * 16777215).toString(16);
       tile.style.backgroundColor = "#" + randomColor;
-      tile.style.opacity = 1;
       return;
     case "ERASE":
       tile.style.backgroundColor = "white";
-      tile.style.opacity = 1;
+      tile.style.opacity = "";
       return;
   }
 };
